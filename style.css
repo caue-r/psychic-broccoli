@@ -1,18 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* =========================
    Configuração geral
    ========================= */
-   :root {
-    --bg1: #020617;
-    --bg2: #020716;
-    --card-bg: rgba(15, 23, 42, 0.92);
-    --accent: #22c55e;
-    --accent-soft: #4ade80;
-    --accent-purple: #7c3aed;
-    --text-main: #e5e7eb;
-    --text-muted: #9ca3af;
-    --border-soft: rgba(148, 163, 184, 0.3);
-  }
-  
+:root {
+  --bg1: #020617;
+  --bg2: #020716;
+  --card-bg: rgba(15, 23, 42, 0.94);
+  --accent: #22c55e;
+  --accent-soft: #4ade80;
+  --accent-purple: #7c3aed;
+  --accent-pink: #ec4899;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border-soft: rgba(148, 163, 184, 0.3);
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-main);
+  background: radial-gradient(circle at top, #0f172a 0, var(--bg1) 40%, #000 90%)
+    fixed;
+  padding: 0 1.5rem 2rem;
+}
+
+/* Aplica Cinzel Decorative em títulos */
+h1, h2, h3 {
+  font-family: 'Cinzel Decorative', serif;
+  letter-spacing: 0.5px;
+}
+
   *,
   *::before,
   *::after {
@@ -47,12 +69,12 @@
     margin: 0.75rem auto 1.5rem;
     padding: 0.75rem 1.25rem;
     border-radius: 999px;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(15, 23, 42, 0.95);
     border: 1px solid var(--border-soft);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(18px);
   }
   
   .logo {
@@ -87,7 +109,7 @@
   
   .nav a:hover {
     color: var(--accent-soft);
-    background: rgba(34, 197, 94, 0.1);
+    background: rgba(34, 197, 94, 0.15);
   }
   
   /* =========================
@@ -95,17 +117,58 @@
      ========================= */
   .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
     gap: 2.5rem;
     align-items: center;
     margin-top: 2rem;
-    padding: 2.5rem 2rem;
-    border-radius: 1.75rem;
+    padding: 2.5rem 2.2rem 2rem; /* padding bottom um pouco menor */
+    border-radius: 1.9rem;
     background: radial-gradient(circle at top left, #22c55e25, transparent 60%),
       radial-gradient(circle at bottom right, #7c3aed25, transparent 60%),
       rgba(15, 23, 42, 0.98);
     border: 1px solid var(--border-soft);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.72);
+    position: relative;
+    overflow: visible; /* IMPORTANTE: deixa a imagem passar pra baixo */
+  }
+    
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at 10% 120%,
+      rgba(236, 72, 153, 0.15),
+      transparent 60%
+    );
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* pill */
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: rgba(15, 23, 42, 0.8);
+    color: var(--text-muted);
+    margin-bottom: 0.9rem;
+  }
+  
+  .pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle, var(--accent-soft), var(--accent));
+    box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
   }
   
   .hero-content h1 {
@@ -121,16 +184,72 @@
     margin-bottom: 1.6rem;
   }
   
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  
+  .hero-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  
+  /* Imagem / orbe */
   .hero-image {
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: center;
   }
   
-  .hero-image img {
-    max-width: 260px;
-    width: 100%;
-    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.8));
+  .hero-orb {
+    position: relative;
+    width: min(460px, 100%); /* orbe bem maior no desktop */
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(24px); /* desce o orbe pra encostar nos cards */
   }
+  
+  
+  .hero-orb-glow {
+    position: absolute;
+    inset: 12%;
+    border-radius: inherit;
+    background: radial-gradient(circle, #22c55e40, transparent 60%);
+    filter: blur(6px);
+  }
+  
+  .hero-orb-ring {
+    position: absolute;
+    inset: 5%;
+    border-radius: inherit;
+    border: 2px dashed rgba(148, 163, 184, 0.4);
+  }
+  
+  .hero-orb-ring--outer {
+    animation: spin-orb 26s linear infinite;
+  }
+  
+  .hero-orb-ring--inner {
+    inset: 15%;
+    border-style: solid;
+    border-color: rgba(52, 211, 153, 0.7);
+    opacity: 0.9;
+    animation: spin-orb-rev 20s linear infinite;
+  }
+  
+  .hero-mage {
+    position: relative;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.9));
+    transform: translateY(10px); /* empurra um pouco mais pra baixo */
+  }  
   
   /* Botões */
   .btn-primary,
@@ -145,30 +264,41 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-decoration: none;
+  
+    /* nova fonte, parecida com a default mas mais bonitinha */
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
+  
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+    background: linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-purple),
+      var(--accent-pink)
+    );
     color: #0b1120;
     font-weight: 600;
-    box-shadow: 0 14px 35px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 14px 35px rgba(34, 197, 94, 0.5);
+    background-size: 220% 220%;
+    animation: btn-gradient 14s ease infinite;
   }
   
   .btn-primary:hover {
     transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 18px 45px rgba(34, 197, 94, 0.55);
+    box-shadow: 0 18px 45px rgba(34, 197, 94, 0.65);
   }
   
   .btn-secondary {
     width: 100%;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(15, 23, 42, 0.96);
     color: var(--accent-soft);
-    border: 1px solid rgba(34, 197, 94, 0.6);
+    border: 1px solid rgba(34, 197, 94, 0.7);
     font-weight: 500;
   }
   
   .btn-secondary:hover {
-    background: rgba(34, 197, 94, 0.12);
+    background: rgba(34, 197, 94, 0.14);
   }
   
   /* =========================
@@ -182,7 +312,12 @@
   .sobre h2,
   .contato h2 {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
   }
   
   .product-grid {
@@ -201,14 +336,14 @@
     flex-direction: column;
     gap: 0.5rem;
     position: relative;
-    overflow: hidden;
+    overflow: visible;   /* <-- agora o selo pode passar da borda */
   }
   
   .product-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top, rgba(34, 197, 94, 0.16), transparent 55%);
+    background: radial-gradient(circle at top, rgba(34, 197, 94, 0.18), transparent 55%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -244,10 +379,34 @@
     font-size: 1.05rem;
   }
   
-  .product-card.destaque {
-    border-color: rgba(244, 244, 245, 0.8);
-    box-shadow: 0 18px 60px rgba(34, 197, 94, 0.4);
+  /* símbolo da moeda psíquica */
+  .product-card .price::before {
+    content: "₰ ";
+    font-family: 'Cinzel Decorative', serif; /* ou Inter, se preferir mais clean */
+    font-size: 0.95em;
+    margin-right: 0.05rem;
   }
+  
+  
+  .product-card.destaque {
+    border-color: rgba(244, 244, 245, 0.95);
+    box-shadow: 0 18px 60px rgba(34, 197, 94, 0.5);
+  }
+  
+  .badge-popular {
+    position: absolute;
+    top: -0.6rem;          /* sobe um pouco pra “flutuar” acima do card */
+    right: 1rem;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(236, 72, 153, 0.9);
+    border: 1px solid rgba(248, 250, 252, 0.8);
+    color: #f9fafb;
+    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.55);
+    pointer-events: none;  /* não atrapalha clique no card */
+  }
+  
   
   /* =========================
      Sobre & Contato
@@ -268,6 +427,96 @@
   .contato a:hover {
     text-decoration: underline;
   }
+
+  .endereco {
+    margin-top: 3rem;
+  }
+  
+  .endereco .section-subtitle {
+    margin-bottom: 1.1rem;
+  }
+  
+  .endereco-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  /* linhas alienígenas com efeito RGB */
+  .endereco-line {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    letter-spacing: 0.06em;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  
+    background: linear-gradient(
+      90deg,
+      #ff4d4d,
+      #f97316,
+      #facc15,
+      #22c55e,
+      #3b82f6,
+      #a855f7,
+      #ec4899,
+      #ff4d4d
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rgbText 8s linear infinite;
+    text-shadow: 0 0 8px rgba(15, 23, 42, 0.9);
+  }
+  
+  .endereco-line:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* versão human readable */
+  .endereco-human {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  
+  /* botão de toggle */
+  .btn-endereco-toggle {
+    align-self: flex-start;
+    margin-top: 0.2rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-endereco-toggle::before {
+    content: "👁‍🗨";
+    font-size: 0.9rem;
+  }
+  
+  .btn-endereco-toggle:hover {
+    border-color: var(--accent-soft);
+    color: var(--accent-soft);
+    transform: translateY(-1px);
+  }
+  
+  /* utilitário pra esconder */
+  .hidden {
+    display: none;
+  }
+  
   
   /* =========================
      Footer
@@ -283,12 +532,58 @@
   }
   
   /* =========================
+     Animações
+     ========================= */
+  @keyframes rgbText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+  }
+
+  @keyframes spin-orb {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spin-orb-rev {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+  
+  @keyframes btn-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* =========================
      Responsivo
      ========================= */
   @media (max-width: 900px) {
     .hero {
       grid-template-columns: 1fr;
       text-align: center;
+      padding: 2rem 1.7rem;
     }
   
     .hero-content p {
@@ -297,6 +592,18 @@
   
     .hero-image {
       order: -1;
+    }
+  
+    .hero-orb {
+      width: min(320px, 100%);
+    }
+  
+    .hero-actions {
+      justify-content: center;
+    }
+  
+    .hero-pill {
+      margin-inline: auto;
     }
   
     .product-grid {
@@ -321,10 +628,6 @@
     .nav {
       justify-content: center;
       flex-wrap: wrap;
-    }
-  
-    .hero {
-      padding: 1.8rem 1.4rem;
     }
   
     .product-grid {

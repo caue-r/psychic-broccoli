@@ -24,22 +24,46 @@
       <!-- HERO -->
       <section class="hero">
         <div class="hero-content">
+          <div class="hero-pill">
+            <span class="pill-dot"></span>
+            Loja oficial do mago brócolis
+          </div>
+
           <h1>Desperte seus poderes vegetais.</h1>
           <p>
             Poções, amuletos e snacks místicos feitos com o mais raro
             <strong>Brócolis Psíquico</strong> do multiverso.
           </p>
-          <a href="#produtos" class="btn-primary">Ver produtos</a>
+
+          <div class="hero-actions">
+            <a href="#produtos" class="btn-primary">Ver produtos</a>
+            <span class="hero-note">
+              ✨ Entrega em todas as dimensões conhecidas.
+            </span>
+          </div>
         </div>
 
         <div class="hero-image">
-          <img src="brocolis-psiquico.png" alt="Mago Brócolis Psíquico" />
+          <div class="hero-orb">
+            <div class="hero-orb-glow"></div>
+            <div class="hero-orb-ring hero-orb-ring--outer"></div>
+            <div class="hero-orb-ring hero-orb-ring--inner"></div>
+
+            <img
+              src="brocolis-psiquico.png"
+              alt="Mago Brócolis Psíquico"
+              class="hero-mage"
+            />
+          </div>
         </div>
       </section>
 
       <!-- PRODUTOS -->
       <section id="produtos" class="produtos">
         <h2>Produtos em destaque</h2>
+        <p class="section-subtitle">
+          Escolhidos a dedo pelo próprio brócolis oracular.
+        </p>
 
         <div class="product-grid">
           <!-- Produto 1 -->
@@ -50,19 +74,20 @@
               Uma esfera energizada de brócolis concentrado. Perfeita para
               sessões de estudo, RPG e programação madrugada adentro.
             </p>
-            <p class="price">R$ 79,90</p>
+            <p class="price">79,90</p>
             <button class="btn-secondary">Adicionar ao carrinho</button>
           </article>
 
           <!-- Produto 2 -->
           <article class="product-card destaque">
+            <div class="badge-popular">Mais pedido</div>
             <h3>Infusão Psíquica Suprema</h3>
-            <p class="tag">Produto mais pedido</p>
+            <p class="tag">Chá místico • Edição limitada</p>
             <p class="desc">
-              Chá místico de brocolis psíquico com ervas dimensionais. Relatos
+              Infusão de brócolis psíquico com ervas dimensionais. Relatos
               incluem sonhos lúcidos e ideias geniais repentinas.
             </p>
-            <p class="price">R$ 59,90</p>
+            <p class="price">59,90</p>
             <button class="btn-secondary">Adicionar ao carrinho</button>
           </article>
 
@@ -74,7 +99,7 @@
               Petiscos assados, ricos em energia astral. Crocantes, leves e
               perfeitos para compartilhar pensamentos (e o pacote).
             </p>
-            <p class="price">R$ 34,90</p>
+            <p class="price">34,90</p>
             <button class="btn-secondary">Adicionar ao carrinho</button>
           </article>
         </div>
@@ -90,7 +115,37 @@
           divertidos e, claro, deliciosos.
         </p>
       </section>
-
+            <!-- ENDEREÇO INTERGALÁCTICO -->
+            <section id="endereco" class="endereco">
+              <h2>Endereço intergaláctico</h2>
+              <p class="section-subtitle">
+                Para quem insiste em visitar o templo físico do Brócolis Psíquico.
+              </p>
+            
+              <div class="endereco-wrapper">
+                <!-- Bloco alienígena (padrão) -->
+                <div id="endereco-alien" class="endereco-block">
+                  <p class="endereco-line">
+                    ⟡ Setor Ϟ-7 • Nebulosa ᚠᛇ-Σ • Órbita 9
+                  </p>
+                  <p class="endereco-line">
+                    ✦ Quadrante Ψ-42 • Via Láctea Paralela ∿ • Portal 𝕭-13
+                  </p>
+                  <p class="endereco-line">
+                    ⭑ Coordenadas: Θ₃.₁₄ • Λ₀.₆₆ • RΔ-∞
+                  </p>
+                </div>
+            
+                <!-- Texto humano (começa escondido) -->
+                <p id="endereco-humano" class="endereco-human hidden">
+                  Algum lugar entre esta galáxia e Manaus - AM.
+                </p>
+            
+                <button type="button" class="btn-endereco-toggle" id="btn-endereco-toggle">
+                  Endereço humano
+                </button>
+              </div>
+            </section>            
       <!-- CONTATO -->
       <section id="contato" class="contato">
         <h2>Contato</h2>
@@ -107,5 +162,28 @@
     <footer class="footer">
       <p>© 2025 Brócolis Psíquico. Todos os poderes reservados.</p>
     </footer>
+    <script>
+      const alienBlock = document.getElementById("endereco-alien");
+      const humanLine = document.getElementById("endereco-humano");
+      const btnEndereco = document.getElementById("btn-endereco-toggle");
+    
+      if (alienBlock && humanLine && btnEndereco) {
+        btnEndereco.addEventListener("click", () => {
+          const mostrandoAlien = !alienBlock.classList.contains("hidden");
+    
+          if (mostrandoAlien) {
+            // troca pra endereço humano
+            alienBlock.classList.add("hidden");
+            humanLine.classList.remove("hidden");
+            btnEndereco.textContent = "Ver endereço intergaláctico";
+          } else {
+            // volta pro alien
+            humanLine.classList.add("hidden");
+            alienBlock.classList.remove("hidden");
+            btnEndereco.textContent = "Endereço humano";
+          }
+        });
+      }
+    </script>    
   </body>
 </html>
