@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brócolis Psíquico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg1: #030712;
+      --bg2: #050816;
+      --neon-green: #4ade80;
+      --neon-purple: #a855f7;
+      --soft-purple: #c4b5fd;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent: #22c55e;
+      --danger: #fb7185;
+      --border-soft: rgba(148, 163, 184, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, var(--bg1) 35%, var(--bg2) 100%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+
+    /* Aura psicodélica no fundo */
+    .aura {
+      position: fixed;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(74, 222, 128, 0.15), transparent 60%),
+        radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.18), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.15), transparent 55%);
+      filter: blur(2px);
+      z-index: -2;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    .wrapper {
+      max-width: 900px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2rem;
+      padding: 2rem;
+      border-radius: 1.75rem;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.75)
+      );
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 780px) {
+      .wrapper {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.5rem;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 222, 128, 0.6);
+      background: radial-gradient(circle at top left, rgba(74, 222, 128, 0.16), transparent);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft-purple);
+      margin-bottom: 1rem;
+    }
+
+    .badge-dot {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--neon-green), var(--accent));
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    h1 span {
+      background: linear-gradient(120deg, var(--neon-green), var(--neon-purple));
+      -webkit-background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 18px rgba(74, 222, 128, 0.35));
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+      line-height: 1.5;
+      margin-bottom: 1.4rem;
+    }
+
+    .scan-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: linear-gradient(
+        90deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.7)
+      );
+      margin-bottom: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scan-bar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(74, 222, 128, 0.32) 40%,
+        rgba(168, 85, 247, 0.35) 60%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      animation: scan 4s linear infinite;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    @keyframes scan {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
+    .scan-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.25), rgba(15, 23, 42, 1));
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.5);
+      font-size: 1.2rem;
+    }
+
+    .scan-text-main {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft-purple);
+    }
+
+    .scan-text-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .scan-text-sub strong {
+      color: var(--neon-green);
+      font-weight: 500;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      border-color: rgba(34, 197, 94, 0.7);
+      background: radial-gradient(circle at top left, rgba(74, 222, 128, 0.35), rgba(22, 163, 74, 0.9));
+      box-shadow:
+        0 12px 30px rgba(22, 163, 74, 0.6),
+        0 0 18px rgba(74, 222, 128, 0.8);
+      color: #022c22;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 18px 40px rgba(22, 163, 74, 0.7),
+        0 0 22px rgba(74, 222, 128, 0.9);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(168, 85, 247, 0.9);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+      background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.28), rgba(15, 23, 42, 1));
+    }
+
+    .btn-icon {
+      font-size: 1.1rem;
+    }
+
+    .list {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .list-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+
+    .list-bullet {
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--neon-purple), transparent);
+      margin-top: 0.25rem;
+    }
+
+    .list-item span strong {
+      color: var(--neon-green);
+      font-weight: 500;
+    }
+
+    /* Seção da direita: o Brócolis */
+    .right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .broccoli-orbit {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, rgba(74, 222, 128, 0.22), transparent 60%);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+      box-shadow:
+        0 0 40px rgba(34, 197, 94, 0.65),
+        0 0 110px rgba(132, 204, 22, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    @media (max-width: 780px) {
+      .right {
+        order: -1;
+      }
+      .broccoli-orbit {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    .orbit-ring {
+      position: absolute;
+      inset: 16px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      border-top-color: rgba(74, 222, 128, 0.9);
+      border-left-color: rgba(168, 85, 247, 0.9);
+      animation: spin 18s linear infinite;
+      opacity: 0.85;
+    }
+
+    .orbit-ring:nth-child(2) {
+      inset: 38px;
+      border-style: solid;
+      border-right-color: rgba(74, 222, 128, 0.5);
+      border-bottom-color: rgba(59, 130, 246, 0.7);
+      border-top-color: transparent;
+      border-left-color: transparent;
+      animation-duration: 26s;
+      animation-direction: reverse;
+      opacity: 0.7;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .broccoli-core {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 1.9rem;
+      background: radial-gradient(circle at 30% 0, #22c55e, #14532d);
+      box-shadow:
+        0 0 40px rgba(34, 197, 94, 0.85),
+        0 0 120px rgba(190, 242, 100, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(4px);
+      animation: float 4.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(4px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .broccoli-core::before {
+      /* “coroa” de brócolis */
+      content: "";
+      position: absolute;
+      top: -36px;
+      width: 125%;
+      height: 70px;
+      border-radius: 999px 999px 50px 50px;
+      background:
+        radial-gradient(circle at 20% 40%, #bbf7d0, transparent 60%),
+        radial-gradient(circle at 50% 0, #22c55e, #15803d),
+        radial-gradient(circle at 80% 50%, #4ade80, #166534);
+      box-shadow:
+        0 0 26px rgba(22, 163, 74, 0.9),
+        0 0 90px rgba(132, 204, 22, 0.8);
+    }
+
+    .broccoli-eye {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e5e7eb, #020617);
+      box-shadow:
+        0 0 18px rgba(251, 113, 133, 0.9),
+        0 0 40px rgba(244, 63, 94, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .broccoli-eye::before {
+      /* íris */
+      content: "";
+      width: 60%;
+      height: 60%;
+      border-radius: 999px;
+      background: radial-gradient(circle, #f97316 15%, #ec4899 50%, #22c55e 100%);
+      animation: iris 3.2s ease-in-out infinite;
+    }
+
+    @keyframes iris {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(2px, -1px) scale(1.02); }
+      50% { transform: translate(-2px, 1px) scale(0.98); }
+      75% { transform: translate(1px, 1px) scale(1.01); }
+    }
+
+    .broccoli-eye::after {
+      /* reflexo de luz */
+      content: "";
+      position: absolute;
+      top: 18%;
+      left: 25%;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(248, 250, 252, 0.95), transparent);
+      opacity: 0.9;
+    }
+
+    .tag {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(148, 163, 184, 0.85);
+      opacity: 0.8;
+    }
+
+    .tag span {
+      color: var(--neon-green);
+    }
+
+    /* Chips orbitando o brócolis */
+    .chip {
+      position: absolute;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+    }
+
+    .chip:nth-of-type(1) {
+      top: 8%;
+      left: 8%;
+    }
+
+    .chip:nth-of-type(2) {
+      top: 12%;
+      right: 5%;
+    }
+
+    .chip:nth-of-type(3) {
+      bottom: 12%;
+      left: 6%;
+    }
+
+    .chip:nth-of-type(4) {
+      bottom: 6%;
+      right: 8%;
+    }
+
+    .chip span {
+      color: var(--neon-purple);
+    }
+  </style>
+</head>
+<body>
+  <div class="aura"></div>
+  <div class="noise"></div>
+
+  <main class="wrapper">
+    <section>
+      <div class="badge">
+        <div class="badge-dot"></div>
+        <span>Experimento &middot; Brócolis Psíquico</span>
+      </div>
+
+      <h1>
+        Desbloqueie o <span>Brócolis Psíquico</span>
+      </h1>
+
+      <p class="subtitle">
+        Um mini-portal místico onde vegetais evoluídos treinam seus poderes mentais
+        para te ajudar a focar, relaxar e, eventualmente, dominar o universo (com gentileza).
+      </p>
+
+      <div class="scan-bar">
+        <div class="scan-icon">🧠</div>
+        <div>
+          <div class="scan-text-main">Leitura televegetal ativa</div>
+          <div class="scan-text-sub">
+            Sinal mental estável: <strong>97%</strong> &middot; Zona de conforto: <strong>cérebro ligeiramente crocante</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">
+          <span class="btn-icon">🥦</span>
+          <span>Conectar ao Brócolis</span>
+        </a>
+
+        <a href="#" class="btn btn-ghost">
+          <span class="btn-icon">✨</span>
+          <span>Ver habilidades psíquicas</span>
+        </a>
+      </div>
+
+      <div class="list">
+        <div class="list-item">
+          <div class="list-bullet"></div>
+          <span>
+            <strong>Modo Foco Crocante:</strong> ondas mentais que lembram o barulho de brócolis sendo mastigado.
+          </span>
+        </div>
+        <div class="list-item">
+          <div class="list-bullet"></div>
+          <span>
+            <strong>Campo de Calma Verde:</strong> reduz o caos interno em até 42,7% (dado totalmente não científico).
+          </span>
+        </div>
+        <div class="list-item">
+          <div class="list-bullet"></div>
+          <span>
+            <strong>Telepatia Gourmet:</strong> envia lembretes psíquicos para você beber água e comer algo saudável.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="right" aria-hidden="true">
+      <div class="broccoli-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+
+        <div class="broccoli-core">
+          <div class="broccoli-eye"></div>
+        </div>
+      </div>
+
+      <div class="chip"><span>Lv. 23</span> &middot; Brócolis Oracular</div>
+      <div class="chip">Frequência mental: <span>4,2 GHz</span></div>
+      <div class="chip">Afinidade: <span>Foco &amp; Memória</span></div>
+      <div class="chip">Status: <span>Levemente temperado</span></div>
+
+      <div class="tag">
+        protótipo &middot; canalizado por <span>🥦🧠</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
