@@ -1,231 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Brócolis Psíquico</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="aura"></div>
-  <div class="noise"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Loja Brócolis Psíquico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="logo">
+        <span class="emoji">🥦</span>
+        <span class="logo-text">Brócolis Psíquico</span>
+      </div>
 
-  <header class="topbar">
-    <div class="logo">
-      <span class="logo-icon">🥦</span>
-      <span class="logo-text">Brócolis Psíquico</span>
-    </div>
+      <nav class="nav">
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
 
-    <nav class="nav">
-      <a href="#inicio">Início</a>
-      <a href="#poderes">Poderes</a>
-      <a href="#laboratorio">Laboratório</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Seção 1: Hero / Início -->
-    <section id="inicio" class="wrapper hero">
-      <section class="hero-left">
-        <div class="badge">
-          <div class="badge-dot"></div>
-          <span>Experimento &middot; Brócolis Psíquico</span>
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Desperte seus poderes vegetais.</h1>
+          <p>
+            Poções, amuletos e snacks místicos feitos com o mais raro
+            <strong>Brócolis Psíquico</strong> do multiverso.
+          </p>
+          <a href="#produtos" class="btn-primary">Ver produtos</a>
         </div>
 
-        <h1>
-          Desbloqueie o <span>Brócolis Psíquico</span>
-        </h1>
-
-        <p class="subtitle">
-          Um portal místico onde vegetais evoluídos treinam seus poderes mentais
-          para te ajudar a focar, relaxar e, discretamente, dominar o universo.
-        </p>
-
-        <div class="scan-bar">
-          <div class="scan-icon">🧠</div>
-          <div>
-            <div class="scan-text-main">Leitura televegetal ativa</div>
-            <div class="scan-text-sub">
-              Sinal mental estável: <strong>97%</strong> &middot;
-              Zona de conforto: <strong>cérebro ligeiramente crocante</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="buttons">
-          <a href="#poderes" class="btn btn-primary">
-            <span class="btn-icon">🥦</span>
-            <span>Conectar ao Brócolis</span>
-          </a>
-
-          <a href="#laboratorio" class="btn btn-ghost">
-            <span class="btn-icon">✨</span>
-            <span>Ver o experimento</span>
-          </a>
-        </div>
-
-        <div class="list">
-          <div class="list-item">
-            <div class="list-bullet"></div>
-            <span>
-              <strong>Modo Foco Crocante:</strong> ondas mentais que lembram o som
-              de brócolis sendo mastigado em câmera lenta.
-            </span>
-          </div>
-          <div class="list-item">
-            <div class="list-bullet"></div>
-            <span>
-              <strong>Campo de Calma Verde:</strong> reduz o caos interno em até
-              42,7% (estatística 0% confiável, 100% estética).
-            </span>
-          </div>
-          <div class="list-item">
-            <div class="list-bullet"></div>
-            <span>
-              <strong>Telepatia Gourmet:</strong> lembretes psíquicos para beber
-              água e evitar viver só de miojo.
-            </span>
-          </div>
+        <div class="hero-image">
+          <img src="brocolis-psiquico.png" alt="Mago Brócolis Psíquico" />
         </div>
       </section>
 
-    <section class="hero-right" aria-hidden="true">
-        <div class="broccoli-orbit">
-            <div class="orbit-ring"></div>
-            <div class="orbit-ring"></div>
+      <!-- PRODUTOS -->
+      <section id="produtos" class="produtos">
+        <h2>Produtos em destaque</h2>
 
-            <img
-            src="brocolis-psiquico.png"
-            alt="Brócolis psíquico em forma de mago"
-            class="broccoli-img"
-            />
-        </div>
-
-        <div class="chip"><span>Lv. 23</span> &middot; Brócolis Oracular</div>
-        <div class="chip">Frequência mental: <span>4,2 GHz</span></div>
-        <div class="chip">Afinidade: <span>Foco &amp; Memória</span></div>
-        <div class="chip">Status: <span>Levemente temperado</span></div>
-
-        <div class="tag">
-            protótipo &middot; canalizado por <span>🥦🧠</span>
-        </div>
-    </section>
-
-
-    <!-- Seção 2: Poderes -->
-    <section id="poderes" class="section section-powers">
-      <div class="section-header">
-        <h2>Poderes Psíquicos</h2>
-        <p>
-          Cada brócolis desperto manifesta habilidades únicas. Escolha sua
-          especialização mental (ou todas, vai).
-        </p>
-      </div>
-
-      <div class="cards-grid">
-        <article class="card">
-          <div class="card-label">Foco</div>
-          <h3>Raio de Atenção Crocante</h3>
-          <p>
-            Canalize pensamentos dispersos em um feixe de concentração verde-limão.
-            Ideal para estudos, code vibes e maratonas de anime.
-          </p>
-          <ul class="card-list">
-            <li>+35% resistência a notificações aleatórias</li>
-            <li>Modo “só mais um pomodoro” ativado</li>
-            <li>Compatível com café e chá de camomila</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="card-label">Calma</div>
-          <h3>Escudo Anti-Caos Mental</h3>
-          <p>
-            Um campo de calma que envolve sua mente como vapor saindo de um
-            brócolis recém-cozido.
-          </p>
-          <ul class="card-list">
-            <li>Reduz surtos existenciais de madrugada</li>
-            <li>Respiração mais leve e menos drama</li>
-            <li>Perfeito para calls tensas e provas difíceis</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="card-label">Rotina</div>
-          <h3>Ping Psíquico de Hábitos</h3>
-          <p>
-            Pequenos “toques mentais” lembrando você de beber água, levantar da cadeira
-            e não ignorar aquele projeto parado.
-          </p>
-          <ul class="card-list">
-            <li>Lembretes sutis, sem culpa</li>
-            <li>Combina com to-do list, bullet journal e post-its</li>
-            <li>Ideal para quem vive no “começo amanhã”</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- Seção 3: Laboratório -->
-    <section id="laboratorio" class="section section-lab">
-      <div class="section-header">
-        <h2>Laboratório Televegetal</h2>
-        <p>
-          É aqui que o experimento acontece. Três etapas simples para sintonizar
-          sua mente com o Brócolis Psíquico.
-        </p>
-      </div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <div class="step-content">
-            <h3>Alinhamento de Frequência</h3>
-            <p>
-              Sente-se confortável, respire fundo e imagine um brócolis flutuando
-              no vazio cósmico. Pronto, o canal foi aberto.
+        <div class="product-grid">
+          <!-- Produto 1 -->
+          <article class="product-card">
+            <h3>Orbe de Brócolis Arcano</h3>
+            <p class="tag">+50 de foco mental</p>
+            <p class="desc">
+              Uma esfera energizada de brócolis concentrado. Perfeita para
+              sessões de estudo, RPG e programação madrugada adentro.
             </p>
-          </div>
-        </div>
+            <p class="price">R$ 79,90</p>
+            <button class="btn-secondary">Adicionar ao carrinho</button>
+          </article>
 
-        <div class="step">
-          <div class="step-number">02</div>
-          <div class="step-content">
-            <h3>Sincronização Neural Verde</h3>
-            <p>
-              Escolha um poder psíquico na seção anterior e foque nele.
-              O Brócolis ajusta suas ondas mentais para acompanhar.
+          <!-- Produto 2 -->
+          <article class="product-card destaque">
+            <h3>Infusão Psíquica Suprema</h3>
+            <p class="tag">Produto mais pedido</p>
+            <p class="desc">
+              Chá místico de brocolis psíquico com ervas dimensionais. Relatos
+              incluem sonhos lúcidos e ideias geniais repentinas.
             </p>
-          </div>
-        </div>
+            <p class="price">R$ 59,90</p>
+            <button class="btn-secondary">Adicionar ao carrinho</button>
+          </article>
 
-        <div class="step">
-          <div class="step-number">03</div>
-          <div class="step-content">
-            <h3>Modo Crocante Ativado</h3>
-            <p>
-              Quando uma sensação de “ok, agora vai” aparecer, é o sinal.
-              Você está oficialmente em modo Brócolis Psíquico.
+          <!-- Produto 3 -->
+          <article class="product-card">
+            <h3>Snacks Telepatas Crocantes</h3>
+            <p class="tag">Leve para qualquer missão</p>
+            <p class="desc">
+              Petiscos assados, ricos em energia astral. Crocantes, leves e
+              perfeitos para compartilhar pensamentos (e o pacote).
             </p>
-          </div>
+            <p class="price">R$ 34,90</p>
+            <button class="btn-secondary">Adicionar ao carrinho</button>
+          </article>
         </div>
-      </div>
+      </section>
 
-      <div class="lab-footer">
+      <!-- SOBRE -->
+      <section id="sobre" class="sobre">
+        <h2>Sobre a loja</h2>
         <p>
-          <span class="lab-pill">Disclaimer imaginário:</span>
-          nenhum brócolis real foi conectado ao seu cérebro (ainda).
+          A Loja <strong>Brócolis Psíquico</strong> nasceu de um experimento
+          mágico que deu muito certo. Desde então, viajamos entre realidades
+          colhendo os brócolis mais raros para criar itens energéticos,
+          divertidos e, claro, deliciosos.
         </p>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer class="footer">
-    <p>
-      Projeto experimental &middot; Sintonizado com carinho por um
-      <span>brócolis ligeiramente consciente</span>.
-    </p>
-  </footer>
-</body>
+      <!-- CONTATO -->
+      <section id="contato" class="contato">
+        <h2>Contato</h2>
+        <p>Dúvidas, parcerias ou visões místicas?</p>
+        <p>
+          Envie um e-mail para
+          <a href="mailto:contato@brocolispsiquico.com">
+            contato@brocolispsiquico.com
+          </a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Brócolis Psíquico. Todos os poderes reservados.</p>
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,334 @@
+/* =========================
+   Configuração geral
+   ========================= */
+   :root {
+    --bg1: #020617;
+    --bg2: #020716;
+    --card-bg: rgba(15, 23, 42, 0.92);
+    --accent: #22c55e;
+    --accent-soft: #4ade80;
+    --accent-purple: #7c3aed;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --border-soft: rgba(148, 163, 184, 0.3);
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    color: var(--text-main);
+    background: radial-gradient(circle at top, #0f172a 0, var(--bg1) 40%, #000 90%)
+      fixed;
+    padding: 0 1.5rem 2rem;
+  }
+  
+  /* =========================
+     Layout
+     ========================= */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* =========================
+     Topbar
+     ========================= */
+  .topbar {
+    max-width: 1100px;
+    margin: 0.75rem auto 1.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(16px);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  
+  .logo-text {
+    font-size: 1.05rem;
+  }
+  
+  .logo .emoji {
+    font-size: 1.4rem;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+  }
+  
+  .nav a:hover {
+    color: var(--accent-soft);
+    background: rgba(34, 197, 94, 0.1);
+  }
+  
+  /* =========================
+     Hero
+     ========================= */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 2.5rem 2rem;
+    border-radius: 1.75rem;
+    background: radial-gradient(circle at top left, #22c55e25, transparent 60%),
+      radial-gradient(circle at bottom right, #7c3aed25, transparent 60%),
+      rgba(15, 23, 42, 0.98);
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+  }
+  
+  .hero-content h1 {
+    font-size: clamp(2.1rem, 3vw, 2.6rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    max-width: 28rem;
+    margin-bottom: 1.6rem;
+  }
+  
+  .hero-image {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hero-image img {
+    max-width: 260px;
+    width: 100%;
+    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.8));
+  }
+  
+  /* Botões */
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+    color: #0b1120;
+    font-weight: 600;
+    box-shadow: 0 14px 35px rgba(34, 197, 94, 0.4);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 18px 45px rgba(34, 197, 94, 0.55);
+  }
+  
+  .btn-secondary {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--accent-soft);
+    border: 1px solid rgba(34, 197, 94, 0.6);
+    font-weight: 500;
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(34, 197, 94, 0.12);
+  }
+  
+  /* =========================
+     Produtos
+     ========================= */
+  section {
+    margin-top: 3rem;
+  }
+  
+  .produtos h2,
+  .sobre h2,
+  .contato h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .product-card {
+    background: var(--card-bg);
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-soft);
+    padding: 1.3rem 1.25rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .product-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(34, 197, 94, 0.16), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .product-card:hover::before {
+    opacity: 1;
+  }
+  
+  .product-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .product-card .tag {
+    font-size: 0.8rem;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  
+  .product-card .desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    flex: 1;
+    margin-top: 0.3rem;
+  }
+  
+  .product-card .price {
+    margin-top: 0.6rem;
+    font-weight: 600;
+    color: var(--accent-soft);
+    font-size: 1.05rem;
+  }
+  
+  .product-card.destaque {
+    border-color: rgba(244, 244, 245, 0.8);
+    box-shadow: 0 18px 60px rgba(34, 197, 94, 0.4);
+  }
+  
+  /* =========================
+     Sobre & Contato
+     ========================= */
+  .sobre p,
+  .contato p {
+    max-width: 640px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .contato a {
+    color: var(--accent-soft);
+    text-decoration: none;
+  }
+  
+  .contato a:hover {
+    text-decoration: underline;
+  }
+  
+  /* =========================
+     Footer
+     ========================= */
+  .footer {
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.9);
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  
+  /* =========================
+     Responsivo
+     ========================= */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .hero-content p {
+      margin-inline: auto;
+    }
+  
+    .hero-image {
+      order: -1;
+    }
+  
+    .product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  
+    .topbar {
+      border-radius: 1rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    body {
+      padding: 0 1rem 1.5rem;
+    }
+  
+    .topbar {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .nav {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  
+    .hero {
+      padding: 1.8rem 1.4rem;
+    }
+  
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
